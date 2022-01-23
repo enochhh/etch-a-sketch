@@ -7,9 +7,8 @@ function createGrid(rows, cols) {
     for (i = 0; i < size; i++) {
         const cell = document.createElement('div');
         cell.classList.add("cell");
-        // cell.innerText = (i+1);
         container.appendChild(cell).className = "grid-item";
     }
 }
 
-createGrid(16, 16);
+createGrid(64, 64);
