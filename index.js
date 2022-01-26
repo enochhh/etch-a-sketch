@@ -5,8 +5,8 @@ const blackDraw = document.getElementById('black');
 const rainbowDraw = document.getElementById('rainbow');
 
 clear.addEventListener("click", clearGrid);
-blackDraw.addEventListener("click", colorItem);
-rainbowDraw.addEventListener("click", colorItem);
+blackDraw.addEventListener("click", colorPick);
+rainbowDraw.addEventListener("click", colorPick);
 erase.addEventListener("click", eraseGrid);
 
 function createGrid(rows, cols) {
@@ -25,7 +25,6 @@ function createGrid(rows, cols) {
 }
 
 function eraseGrid() {
-    // For reference on grid :https://fionnachan.medium.com/dynamic-number-of-rows-and-columns-with-css-grid-layout-and-css-variables-cb8e8381b6f2
     let gridItem = document.querySelectorAll(".grid-item");
     gridItem.forEach(item => {
         item.addEventListener('mouseover', (e) => {
@@ -66,11 +65,32 @@ function resetColor (e) {
 
 
 /*Color select of each grid square*/
-function colorItem() {
+// function colorBlack() {
+//     let gridItem = document.querySelectorAll(".grid-item");
+//     gridItem.forEach(item => item.addEventListener('mouseover', (e) => {
+//             blackColor(item);
+//         })
+//     );
+// } 
+
+// function colorRainbow() {
+//     let gridItem = document.querySelectorAll(".grid-item");
+//     gridItem.forEach(item => item.addEventListener('mouseover', (e) => {
+//             rainbowColor(item);
+//         })
+//     );
+// } 
+
+function colorPick(event) {
     let gridItem = document.querySelectorAll(".grid-item");
     gridItem.forEach(item => item.addEventListener('mouseover', (e) => {
-        rainbowColor(item);
-    })
+            if(event.target.id === 'black') {
+                blackColor(item);
+            }
+            else if(event.target.id ==='rainbow') {
+                rainbowColor(item);
+            }
+        })
     );
 } 
 
