@@ -7,20 +7,33 @@ let sliderRange = document.getElementById('sliderRange');
 let sliderVal = document.getElementById('sliderVal');
 
 clear.addEventListener("click", clearGrid);
-// blackDraw.addEventListener("click", colorPick);
-// rainbowDraw.addEventListener("click", colorPick);
 blackDraw.addEventListener("click", colorState);
 rainbowDraw.addEventListener("click", colorState);
 erase.addEventListener("click", eraseGrid);
+
+/* Set the default color on page load so that users can immediately start drawing*/
 let buttonState = 'black';
-colorPick(buttonState);
 
-sliderVal.innerHTML = sliderRange.value;
-
-sliderRange.oninput = function() {
-  sliderVal.innerHTML = this.value;
+window.onload = function() {
+    blackDraw.click();
 }
 
+/* Slider Display */
+sliderVal.innerHTML = `${sliderRange.value} x ${sliderRange.value}`;
+
+sliderRange.oninput = function() {
+  sliderVal.innerHTML = `${this.value} x ${this.value}`;
+}
+
+/* Refresh and create new grid every time grid size is changed,
+    and continue using the same color from the saved button state*/
+sliderRange.onchange = function() {
+    gridContainer.innerHTML = '';
+    createGrid(this.value);
+    colorPick(buttonState);
+}
+
+/* Save the color state when color button is clicked */
 function colorState(e) {
     if (e.target.id === 'black') {
         buttonState = 'black';
@@ -32,14 +45,6 @@ function colorState(e) {
     }
 }
 
-sliderRange.onchange = function() {
-    gridContainer.innerHTML = '';
-    createGrid(this.value);
-    colorPick(buttonState);
-}
-
-createGrid(sliderRange.value);
-
 function createGrid(gridSize) {
     // For reference on grid :https://fionnachan.medium.com/dynamic-number-of-rows-and-columns-with-css-grid-layout-and-css-variables-cb8e8381b6f2
     gridContainer.style.setProperty('--grid-rows', gridSize);
@@ -48,9 +53,6 @@ function createGrid(gridSize) {
     for (i = 0; i < size; i++) {
         const cell = document.createElement('div');
         cell.classList.add("cell");
-        // cell.addEventListener('mouseover', () => {
-        //     cell.classList.add(hover);
-        // });
         gridContainer.appendChild(cell).className = "grid-item";
     }
 }
@@ -79,9 +81,6 @@ function random (number) {
 function rainbowColor (e) {
     const rndCol= 'rgb(' + random(255) + ',' + random(255) +',' + random(255) + ')';
     e.style.backgroundColor = rndCol;
-    //console.log(e.target);
-    /*Wondering why 'e.target.style' kept returning undefined; found that it was due to the fact that 'e' was not an existing target 
-    at the time of function creation*/
 }
 
 /* Default color (black) */
@@ -93,19 +92,7 @@ function resetColor (e) {
     e.style.backgroundColor = 'transparent';
 }
 
-// function colorPick(event) {
-//     let gridItem = document.querySelectorAll(".grid-item");
-//     gridItem.forEach(item => item.addEventListener('mouseover', (e) => {
-//             if(event.target.id === 'black') {
-//                 blackColor(item);
-//             }
-//             else if(event.target.id ==='rainbow') {
-//                 rainbowColor(item);
-//             }
-//         })
-//     );
-// } 
-
+/* Use the saved color state to set each grid square to that color */
 function colorPick(buttonState) {
     let gridItem = document.querySelectorAll(".grid-item");
     gridItem.forEach(item => item.addEventListener('mouseover', (e) => {
@@ -119,24 +106,22 @@ function colorPick(buttonState) {
     );
 } 
 
+createGrid(sliderRange.value);
 
 
-/*Color select of each grid square*/
-// function colorBlack() {
-//     let gridItem = document.querySelectorAll(".grid-item");
-//     gridItem.forEach(item => item.addEventListener('mouseover', (e) => {
-//             blackColor(item);
-//         })
-//     );
-// } 
+/*function colorPick(event) {
+    let gridItem = document.querySelectorAll(".grid-item");
+    gridItem.forEach(item => item.addEventListener('mouseover', (e) => {
+            if(event.target.id === 'black') {
+                blackColor(item);
+            }
+            else if(event.target.id ==='rainbow') {
+                rainbowColor(item);
+            }
+        })
+    );
+}*/ 
 
-// function colorRainbow() {
-//     let gridItem = document.querySelectorAll(".grid-item");
-//     gridItem.forEach(item => item.addEventListener('mouseover', (e) => {
-//             rainbowColor(item);
-//         })
-//     );
-// } 
 
 
 
