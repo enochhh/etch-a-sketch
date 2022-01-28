@@ -9,11 +9,16 @@
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
+    <div id="header"> etch-a-sketch </div>
     <div id="inputContainer">
-        <button class="btn" id="black">Black</button>
-        <button class="btn" id="rainbow">Rainbow</button>
-        <button class="btn" id="erase">Erase</button>
-        <button class="btn" id="clear">Clear</button>
+        <div class="colorPicker"><input type="color" value="black" id="input-color"></div>
+        <div id="btnContainer">
+            <button class="btn" id="color">Color</button>
+            <button class="btn" id="black">Black</button>
+            <button class="btn" id="rainbow">Rainbow</button>
+            <button class="btn" id="erase">Erase</button>
+            <button class="btn" id="clear">Clear</button>
+        </div>
         <div class="rangeSlider">
             <input type="range" min="1" max="64" value="64" class="slider" id="sliderRange">
             <div id="sliderVal"></div>

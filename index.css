@@ -9,6 +9,10 @@
     font-size: 62.5%;
 }
 
+#header {
+    font-size: 6.4rem;
+}
+
 #gridContainer {
     display: grid;
     grid-template-rows: repeat(var(--grid-rows), 1fr);
@@ -19,7 +23,7 @@
 }
 
 .grid-item {
-    border: 1px solid rgb(130, 190, 130);
+    border: none;
     /* padding: 1em; */
     min-width:.1rem;
     min-height:.1rem;

@@ -1,18 +1,22 @@
 const gridContainer = document.getElementById('gridContainer');
 const clear = document.getElementById('clear');
 const erase = document.getElementById('erase');
+const userDraw = document.getElementById('color');
 const blackDraw = document.getElementById('black');
 const rainbowDraw = document.getElementById('rainbow');
 let sliderRange = document.getElementById('sliderRange');
 let sliderVal = document.getElementById('sliderVal');
+let inputColor = document.getElementById('input-color');
 
 clear.addEventListener("click", clearGrid);
 blackDraw.addEventListener("click", colorState);
 rainbowDraw.addEventListener("click", colorState);
+userDraw.addEventListener("click", colorState);
 erase.addEventListener("click", eraseGrid);
 
 /* Set the default color on page load so that users can immediately start drawing*/
 let buttonState = 'black';
+let userChoiceColor = 'black';
 
 window.onload = function() {
     blackDraw.click();
@@ -23,6 +27,12 @@ sliderVal.innerHTML = `${sliderRange.value} x ${sliderRange.value}`;
 
 sliderRange.oninput = function() {
   sliderVal.innerHTML = `${this.value} x ${this.value}`;
+}
+
+/* Color Picker */ 
+inputColor.oninput = function() {
+    userChoiceColor = `${this.value}`;
+    console.log(this.value);
 }
 
 /* Refresh and create new grid every time grid size is changed,
@@ -41,6 +51,10 @@ function colorState(e) {
     }
     else if (e.target.id === 'rainbow') {
         buttonState = 'rainbow';
+        colorPick(buttonState);
+    }
+    else if (e.target.id === 'color') {
+        buttonState = 'color';
         colorPick(buttonState);
     }
 }
@@ -88,6 +102,10 @@ function blackColor (e) {
     e.style.backgroundColor = 'black';
 }
 
+function pickColor (e) {
+    e.style.backgroundColor = userChoiceColor;
+}
+
 function resetColor (e) {
     e.style.backgroundColor = 'transparent';
 }
@@ -101,6 +119,9 @@ function colorPick(buttonState) {
             }
             else if(buttonState ==='rainbow') {
                 rainbowColor(item);
+            }
+            else if(buttonState ==='color') {
+                pickColor(item);
             }
         })
     );
