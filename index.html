@@ -10,20 +10,24 @@
 </head>
 <body>
     <div id="header"> etch-a-sketch </div>
-    <div id="inputContainer">
-        <div class="colorPicker"><input type="color" value="black" id="input-color"></div>
-        <div id="btnContainer">
-            <button class="btn" id="color">Color</button>
-            <button class="btn" id="black">Black</button>
-            <button class="btn" id="rainbow">Rainbow</button>
-            <button class="btn" id="erase">Erase</button>
-            <button class="btn" id="clear">Clear</button>
+    <div id="content">
+        <div class = "flex-container" id="inputContainer">
+            <div id="colorPicker">
+                <input type="color" value="#rrggbb" id="input-color">
+            </div>
+            <div class = "flex-container" id="btnContainer">
+                <button class="btn" id="color">Color</button>
+                <button class="btn" id="rainbow">Rainbow</button>
+                <button class="btn" id="erase">Erase</button>
+                <button class="btn" id="clear">Clear</button>
+            </div>
+            <div class="rangeSlider">
+                <input type="range" min="1" max="64" value="64" class="slider" id="sliderRange">
+                <div id="sliderVal"></div>
+            </div>
         </div>
-        <div class="rangeSlider">
-            <input type="range" min="1" max="64" value="64" class="slider" id="sliderRange">
-            <div id="sliderVal"></div>
-        </div>
+        <div id="gridContainer"></div>
     </div>
-    <div id="gridContainer"></div>
+    <div id="footer">Copyright &copy; 2022 enochhh</div>
 </body>
 </html>

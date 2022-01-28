@@ -2,24 +2,30 @@ const gridContainer = document.getElementById('gridContainer');
 const clear = document.getElementById('clear');
 const erase = document.getElementById('erase');
 const userDraw = document.getElementById('color');
-const blackDraw = document.getElementById('black');
 const rainbowDraw = document.getElementById('rainbow');
 let sliderRange = document.getElementById('sliderRange');
 let sliderVal = document.getElementById('sliderVal');
 let inputColor = document.getElementById('input-color');
+let colorPicker = document.getElementById('colorPicker');
 
+/* Event listeners for grid manipulation*/
 clear.addEventListener("click", clearGrid);
-blackDraw.addEventListener("click", colorState);
 rainbowDraw.addEventListener("click", colorState);
 userDraw.addEventListener("click", colorState);
 erase.addEventListener("click", eraseGrid);
 
+/* Event listeners to show which button is currently activated */
+clear.addEventListener("click", activeButton);
+rainbowDraw.addEventListener("click", activeButton);
+userDraw.addEventListener("click", activeButton);
+erase.addEventListener("click", activeButton);
+
 /* Set the default color on page load so that users can immediately start drawing*/
-let buttonState = 'black';
+let buttonState = 'color';
 let userChoiceColor = 'black';
 
 window.onload = function() {
-    blackDraw.click();
+    userDraw.click();
 }
 
 /* Slider Display */
@@ -32,9 +38,13 @@ sliderRange.oninput = function() {
 /* Color Picker */ 
 inputColor.oninput = function() {
     userChoiceColor = `${this.value}`;
-    console.log(this.value);
 }
 
+inputColor.onchange = function() {
+    colorPicker.style.backgroundColor = inputColor.value;
+}
+
+colorPicker.style.backgroundColor = inputColor.value;
 /* Refresh and create new grid every time grid size is changed,
     and continue using the same color from the saved button state*/
 sliderRange.onchange = function() {
@@ -45,16 +55,12 @@ sliderRange.onchange = function() {
 
 /* Save the color state when color button is clicked */
 function colorState(e) {
-    if (e.target.id === 'black') {
-        buttonState = 'black';
+    if (e.target.id === 'color') {
+        buttonState = 'color';
         colorPick(buttonState);
     }
     else if (e.target.id === 'rainbow') {
         buttonState = 'rainbow';
-        colorPick(buttonState);
-    }
-    else if (e.target.id === 'color') {
-        buttonState = 'color';
         colorPick(buttonState);
     }
 }
@@ -97,11 +103,6 @@ function rainbowColor (e) {
     e.style.backgroundColor = rndCol;
 }
 
-/* Default color (black) */
-function blackColor (e) {
-    e.style.backgroundColor = 'black';
-}
-
 function pickColor (e) {
     e.style.backgroundColor = userChoiceColor;
 }
@@ -114,18 +115,21 @@ function resetColor (e) {
 function colorPick(buttonState) {
     let gridItem = document.querySelectorAll(".grid-item");
     gridItem.forEach(item => item.addEventListener('mouseover', (e) => {
-            if(buttonState === 'black') {
-                blackColor(item);
+            if(buttonState === 'color') {
+                pickColor(item);
             }
             else if(buttonState ==='rainbow') {
                 rainbowColor(item);
             }
-            else if(buttonState ==='color') {
-                pickColor(item);
-            }
         })
     );
 } 
+
+function activeButton(e) {
+    let btn = document.querySelectorAll('.btn');
+    btn.forEach(item => item.style.backgroundColor = '');
+    e.currentTarget.style.backgroundColor = 'gray';
+}
 
 createGrid(sliderRange.value);
 

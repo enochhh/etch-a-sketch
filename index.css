@@ -9,17 +9,43 @@
     font-size: 62.5%;
 }
 
+.body {
+    display:flex;
+    height:100vh;
+    flex-direction:column;
+    justify-content:space-between;
+    align-items:center;
+}
+
 #header {
-    font-size: 6.4rem;
+    font-size: 8rem;
+    text-align: center;
+    margin-top: 3rem;
+    margin-bottom: 5rem;
+}
+
+#footer {
+    font-size: 2rem;
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.btn {
+    padding: 1.5rem;
+    width: 15rem;
+    border:.1rem solid black;
+    border-radius: 1.5rem;
+    font-size: 1.8rem;
 }
 
 #gridContainer {
     display: grid;
     grid-template-rows: repeat(var(--grid-rows), 1fr);
     grid-template-columns: repeat(var(--grid-cols), 1fr);
-    height: 50rem;
-    width: 50rem;
-    border-style:groove; 
+    height: 45rem;
+    width: 45rem;
+    border: .1rem solid black;
+    box-shadow: .5em .5em rgb(138, 132, 132);
 }
 
 .grid-item {
@@ -33,12 +59,55 @@
 
 .slider {
     -webkit-appearance: none;
-    background-color: rgb(130, 190, 130);
+    background-color:transparent;
+    border: .05rem solid black;
     width: 15rem;
     height: .5rem;
     border-radius: 15px;
+    margin-top: 2rem;
 }
 
 #sliderVal {
+    text-align: center;
+}
+
+#colorPicker {
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+    margin-bottom: 2rem;
+    border: .1rem solid black;
+}
+
+#input-color {
+    opacity: 0;
+    width: 8rem;
+    height: 8rem;
+}
+
+
+#sliderVal {
     font-size: 2.5rem;
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: column;
+}
+
+#inputContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items:center;
+}
+
+.flex-container #btnContainer {
+    gap: 2.5rem;
+}
+
+#content {
+    display:flex;
+    justify-content: center;
+    gap: 2.5rem;
 }
